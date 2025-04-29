@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bất Động Sản</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .nav-link {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #10b981;
+            transform: translateY(-2px);
+        }
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo img {
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="header py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="../pages/index.html" class="logo flex items-center">
+                <img src="../assets/images/logo.png" alt="Bất Động Sản Logo" class="h-12 w-auto">
+                <span class="ml-3 text-xl font-bold text-gray-800">Bất Động Sản</span>
+            </a>
+            <button class="md:hidden text-gray-800 focus:outline-none" id="menu-toggle">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <nav class="nav-menu hidden md:flex space-x-6">
+                <a href="../pages/listings.html" class="nav-link text-gray-600 hover:text-green-500">Bất động sản</a>
+                <a href="../pages/sales.html" class="nav-link text-gray-600 hover:text-green-500">Mua bán</a>
+                <a href="../pages/rentals.html" class="nav-link text-gray-600 hover:text-green-500">Cho thuê</a>
+                <a href="../pages/about.html" class="nav-link text-gray-600 hover:text-green-500 font-semibold">Giới thiệu</a>
+                <a href="../pages/account.html" class="nav-link text-gray-600 hover:text-green-500">Liên hệ</a>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <nav class="flex flex-col space-y-4 p-4">
+                <a href="../pages/listings.html" class="nav-link text-gray-600 hover:text-green-500">Bất động sản</a>
+                <a href="../pages/sales.html" class="nav-link text-gray-600 hover:text-green-500">Mua bán</a>
+                <a href="../pages/rentals.html" class="nav-link text-gray-600 hover:text-green-500">Cho thuê</a>
+                <a href="../pages/about.html" class="nav-link text-gray-600 hover:text-green-500 font-semibold">Giới thiệu</a>
+                <a href="../pages/account.html" class="nav-link text-gray-600 hover:text-green-500">Liên hệ</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto my-6 px-4">
+        <!-- Nội dung chính -->
+    </main>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('nav-menu');
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

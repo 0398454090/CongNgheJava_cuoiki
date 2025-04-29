@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Bất Động Sản</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+
+    <!-- Main Content -->
+    <main class="container my-4">
+        <div class="row">
+            <!-- Payment Form -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Thanh toán</h2>
+                        <form id="paymentForm">
+                            <!-- Order Summary -->
+                            <div class="mb-4">
+                                <h4>Thông tin đơn hàng</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Mã giao dịch:</td>
+                                                <td id="transactionId">Loading...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tên bất động sản:</td>
+                                                <td id="propertyName">Loading...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Giá:</td>
+                                                <td id="propertyPrice">Loading...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phí dịch vụ:</td>
+                                                <td id="serviceFee">Loading...</td>
+                                            </tr>
+                                            <tr class="table-active">
+                                                <td><strong>Tổng cộng:</strong></td>
+                                                <td id="totalAmount"><strong>Loading...</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="mb-4">
+                                <h4>Phương thức thanh toán</h4>
+                                <div class="mb-3">
+                                    <select class="form-select" id="paymentMethod" name="paymentMethod" required>
+                                        <option value="">Chọn phương thức thanh toán</option>
+                                        <option value="card">Thẻ tín dụng/ghi nợ</option>
+                                        <option value="bankTransfer">Chuyển khoản ngân hàng</option>
+                                    </select>
+                                </div>
+
+                                <!-- Card Payment Fields -->
+                                <div id="cardFields" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Số thẻ</label>
+                                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="expiryDate" class="form-label">Ngày hết hạn</label>
+                                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nameOnCard" class="form-label">Tên in trên thẻ</label>
+                                        <input type="text" class="form-control" id="nameOnCard" name="nameOnCard">
+                                    </div>
+                                </div>
+
+                                <!-- Bank Transfer Fields -->
+                                <div id="bankTransferFields" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <h5>Thông tin chuyển khoản</h5>
+                                        <p>Ngân hàng: <strong>Vietcombank</strong></p>
+                                        <p>Số tài khoản: <strong>1234567890</strong></p>
+                                        <p>Chủ tài khoản: <strong>CÔNG TY BẤT ĐỘNG SẢN ABC</strong></p>
+                                        <p>Nội dung: <strong>GD [Mã giao dịch]</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Billing Information -->
+                            <div class="mb-4">
+                                <h4>Thông tin thanh toán</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="billingName" class="form-label">Họ và tên</label>
+                                        <input type="text" class="form-control" id="billingName" name="billingName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="billingEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="billingEmail" name="billingEmail" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="billingAddress" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="billingAddress" name="billingAddress" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="billingCity" class="form-label">Thành phố</label>
+                                        <input type="text" class="form-control" id="billingCity" name="billingCity" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="billingPhone" class="form-label">Số điện thoại</label>
+                                        <input type="tel" class="form-control" id="billingPhone" name="billingPhone" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Thanh toán</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Sidebar -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Tóm tắt đơn hàng</h4>
+                        <div class="property-summary mb-4">
+                            <img id="propertyImage" src="" alt="Property" class="img-fluid rounded mb-3">
+                            <h5 id="propertyTitle">Loading...</h5>
+                            <p id="propertyLocation" class="text-muted">Loading...</p>
+                        </div>
+                        <div class="price-summary">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Giá bất động sản:</span>
+                                <span id="summaryPrice">Loading...</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Phí dịch vụ:</span>
+                                <span id="summaryFee">Loading...</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <strong>Tổng cộng:</strong>
+                                <strong id="summaryTotal">Loading...</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Notice -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Bảo mật thanh toán</h5>
+                        <p class="card-text">Chúng tôi sử dụng công nghệ mã hóa SSL để bảo vệ thông tin thanh toán của bạn.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="../assets/images/ssl-badge.jpg" alt="SSL Secure" height="30" class="me-2">
+                            <span>Thanh toán an toàn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/payment.js"></script>
+     <!-- Thêm jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+         $(document).ready(function() {
+             $("#header").load("../templates/header.html", function() {
+                 console.log("Header loaded successfully");
+             });
+             $("#footer").load("../templates/footer.html", function() {
+                 console.log("Footer loaded successfully");
+             });
+         });
+     </script>
+</body>
+</html> 

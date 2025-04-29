@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết bất động sản - Bất Động Sản</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+        }
+        .location-info {
+            margin-top: 1rem;
+        }
+        .nearby-places {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row">
+            <!-- Property Images -->
+            <div class="col-md-8">
+                <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../assets/images/property1.jpg" class="d-block w-100" alt="Property Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/property2.jpg" class="d-block w-100" alt="Property Image">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../assets/images/property3.jpg" class="d-block w-100" alt="Property Image">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Property Info -->
+            <div class="col-md-4">
+                <h2 class="mb-3" id="propertyName">Căn hộ cao cấp Quận 1</h2>
+                <p class="text-primary h4 mb-3" id="propertyPrice">2.500.000.000 VNĐ</p>
+                <div class="mb-3">
+                    <p><i class="bi bi-geo-alt"></i> <span id="propertyAddress">123 Đường ABC, Quận 1, TP.HCM</span></p>
+                    <p><i class="bi bi-rulers"></i> <span id="propertyArea">100m²</span></p>
+                    <p><i class="bi bi-door-open"></i> <span id="propertyBedrooms">3 phòng ngủ</span></p>
+                    <p><i class="bi bi-water"></i> <span id="propertyBathrooms">2 phòng tắm</span></p>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" onclick="window.location.href='payment.html'">
+                        <i class="bi bi-cart"></i> Mua ngay
+                    </button>
+                    <button class="btn btn-outline-primary" id="favoriteBtn">
+                        <i class="bi bi-heart"></i> Thêm vào yêu thích
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">Vị trí</h3>
+                <div id="map"></div>
+                <div class="location-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Thông tin vị trí</h5>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-geo-alt"></i> <span id="fullAddress">123 Đường ABC, Quận 1, TP.HCM</span></li>
+                                <li><i class="bi bi-compass"></i> <span id="coordinates">10.762622, 106.660172</span></li>
+                                <li><i class="bi bi-car-front"></i> <span id="distance">2.5 km từ trung tâm</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Địa điểm lân cận</h5>
+                            <ul class="list-unstyled" id="nearbyPlaces">
+                                <li><i class="bi bi-shop"></i> Siêu thị (500m)</li>
+                                <li><i class="bi bi-hospital"></i> Bệnh viện (1km)</li>
+                                <li><i class="bi bi-bank"></i> Ngân hàng (300m)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Description -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">Mô tả</h3>
+                <p id="propertyDescription">
+                    Căn hộ cao cấp nằm tại vị trí đắc địa, gần các tiện ích quan trọng. 
+                    Thiết kế hiện đại, tiện nghi với đầy đủ nội thất cao cấp. 
+                    Hệ thống an ninh 24/7, bảo vệ chuyên nghiệp.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+ <!-- Thêm jQuery -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy thông tin bất động sản từ URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+            
+            // TODO: Gọi API để lấy thông tin chi tiết bất động sản
+            // Tạm thời sử dụng dữ liệu mẫu
+            const propertyData = {
+                name: 'Căn hộ cao cấp Quận 1',
+                price: 2500000000,
+                address: '123 Đường ABC, Quận 1, TP.HCM',
+                area: '100m²',
+                bedrooms: 3,
+                bathrooms: 2,
+                description: 'Căn hộ cao cấp nằm tại vị trí đắc địa, gần các tiện ích quan trọng. Thiết kế hiện đại, tiện nghi với đầy đủ nội thất cao cấp. Hệ thống an ninh 24/7, bảo vệ chuyên nghiệp.',
+                coordinates: {
+                    lat: 10.762622,
+                    lng: 106.660172
+                }
+            };
+            
+            // Cập nhật thông tin hiển thị
+            document.getElementById('propertyName').textContent = propertyData.name;
+            document.getElementById('propertyPrice').textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(propertyData.price);
+            document.getElementById('propertyAddress').textContent = propertyData.address;
+            document.getElementById('propertyArea').textContent = propertyData.area;
+            document.getElementById('propertyBedrooms').textContent = `${propertyData.bedrooms} phòng ngủ`;
+            document.getElementById('propertyBathrooms').textContent = `${propertyData.bathrooms} phòng tắm`;
+            document.getElementById('propertyDescription').textContent = propertyData.description;
+            document.getElementById('fullAddress').textContent = propertyData.address;
+            document.getElementById('coordinates').textContent = `${propertyData.coordinates.lat}, ${propertyData.coordinates.lng}`;
+            
+            // Khởi tạo bản đồ với Leaflet
+            initMap(propertyData.coordinates.lat, propertyData.coordinates.lng, propertyData.address);
+            
+            // Xử lý nút yêu thích
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            favoriteBtn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('bi-heart')) {
+                    icon.classList.remove('bi-heart');
+                    icon.classList.add('bi-heart-fill');
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('btn-danger');
+                } else {
+                    icon.classList.remove('bi-heart-fill');
+                    icon.classList.add('bi-heart');
+                    this.classList.remove('btn-danger');
+                    this.classList.add('btn-outline-primary');
+                }
+            });
+        });
+
+        // Hàm khởi tạo bản đồ với Leaflet
+        function initMap(latitude, longitude, address) {
+            // Tạo map với vị trí mặc định
+            const map = L.map('map').setView([latitude, longitude], 15);
+            
+            // Thêm tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Thêm marker
+            const marker = L.marker([latitude, longitude]).addTo(map);
+            
+            // Thêm popup
+            marker.bindPopup(`<strong>${address}</strong>`).openPopup();
+        }
+
+
+        $(document).ready(function() {
+         $("#header").load("../templates/header.html", function() {
+             console.log("Header loaded successfully");
+         });
+         $("#footer").load("../templates/footer.html", function() {
+             console.log("Footer loaded successfully");
+         });
+     });
+    </script>
+</body>
+</html> 

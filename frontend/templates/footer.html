@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bất Động Sản</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .footer {
+            background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+            color: #e2e8f0;
+            padding: 3rem 0;
+        }
+        .footer a {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .footer a:hover {
+            color: #68d391;
+            transform: translateX(5px);
+        }
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: #68d391;
+        }
+        .footer hr {
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Main content would go here -->
+    <main></main>
+    
+    <footer class="footer">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Về chúng tôi</h5>
+                    <p class="text-gray-300">Chúng tôi là nền tảng bất động sản hàng đầu, cung cấp dịch vụ mua bán và cho thuê bất động sản chất lượng cao.</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Liên kết nhanh</h5>
+                    <ul class="list-none space-y-2">
+                        <li><a href="../pages/listings.html" class="text-gray-300 hover:text-green-400">Bất động sản</a></li>
+                        <li><a href="../pages/sales.html" class="text-gray-300 hover:text-green-400">Mua bán</a></li>
+                        <li><a href="../pages/rentals.html" class="text-gray-300 hover:text-green-400">Cho thuê</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-green-400">Giới thiệu</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-green-400">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Liên hệ</h5>
+                    <ul class="list-none space-y-2 text-gray-300">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Đường ABC, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone-alt mr-2"></i> (84) 123-456-789</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@batdongsan.com</li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="https://facebook.com" class="social-icon text-gray-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" class="social-icon text-gray-300"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" class="social-icon text-gray-300"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" class="social-icon text-gray-300"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-8">
+            <div class="text-center text-gray-400">
+                <p>© 2024 Bất Động Sản. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

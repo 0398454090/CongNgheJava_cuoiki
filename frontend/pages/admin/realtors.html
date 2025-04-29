@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quản lý danh sách môi giới bất động sản dành cho admin">
+    <title>Quản lý môi giới - Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link href="/assets/css/admin.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <img src="/assets/images/logo.png" alt="Logo quản trị hệ thống" height="40">
+                        <h5 class="text-white mt-2">Quản trị hệ thống</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Tổng quan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/properties.html">
+                                <i class="bi bi-house me-2"></i>
+                                Quản lý bất động sản
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/orders.html">
+                                <i class="bi bi-cart me-2"></i>
+                                Quản lý giao dịch mua bán
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/sales-rentals.html">
+                                <i class="bi bi-key me-2"></i>
+                                Quản lý giao dịch cho thuê
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/payments.html">
+                                <i class="bi bi-credit-card me-2"></i>
+                                Quản lý thanh toán
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/users.html">
+                                <i class="bi bi-people me-2"></i>
+                                Quản lý người dùng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/realtors.html">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Quản lý môi giới
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pages/admin/setting.html">
+                                <i class="bi bi-gear me-2"></i>
+                                Cài đặt
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
+                <!-- Toggle Sidebar Button (Mobile) -->
+                <button class="btn btn-dark d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+                    <i class="bi bi-list"></i> Menu
+                </button>
+
+                <!-- Header -->
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Quản lý môi giới</h2>
+                    <div class="btn-group">
+                        <button class="btn btn-primary admin-only" data-bs-toggle="modal" data-bs-target="#addRealtorModal">
+                            <i class="bi bi-plus-circle me-2"></i> Thêm môi giới
+                        </button>
+                        <button class="btn btn-outline-secondary" aria-label="Xuất báo cáo môi giới">
+                            <i class="bi bi-file-earmark-arrow-down"></i> Xuất báo cáo
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Filters -->
+                <section class="card mb-4">
+                    <div class="card-body">
+                        <form class="row g-3" id="filterForm">
+                            <div class="col-md-4">
+                                <label for="searchInput" class="form-label">Tìm kiếm</label>
+                                <input type="text" class="form-control" id="searchInput" placeholder="Tên, email, số điện thoại..." aria-describedby="searchInputHelp">
+                                <small id="searchInputHelp" class="form-text text-muted">Nhập tên, email hoặc số điện thoại của môi giới</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="statusFilter" class="form-label">Trạng thái</label>
+                                <select class="form-select" id="statusFilter" aria-label="Lọc theo trạng thái">
+                                    <option value="">Tất cả</option>
+                                    <option value="active">Hoạt động</option>
+                                    <option value="inactive">Không hoạt động</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="areaFilter" class="form-label">Khu vực hoạt động</label>
+                                <select class="form-select" id="areaFilter" aria-label="Lọc theo khu vực">
+                                    <option value="">Tất cả</option>
+                                    <option value="quan1">Quận 1</option>
+                                    <option value="quan2">Quận 2</option>
+                                    <option value="quan7">Quận 7</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end gap-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-search me-2"></i> Lọc
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary" aria-label="Xóa bộ lọc">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Realtors Table -->
+                <section class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <label for="rowsPerPage" class="form-label me-2">Hiển thị:</label>
+                                <select id="rowsPerPage" class="form-select w-auto" aria-label="Số dòng mỗi trang">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-outline-secondary" aria-label="In danh sách môi giới">
+                                <i class="bi bi-printer"></i> In
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" aria-label="Danh sách môi giới">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID <i class="bi bi-sort-alpha-down"></i></th>
+                                        <th scope="col">Họ và tên</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Số điện thoại</th>
+                                        <th scope="col">Khu vực hoạt động</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Ngày tham gia</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MG001</td>
+                                        <td>Nguyễn Thị D</td>
+                                        <td>nguyenthid@example.com</td>
+                                        <td>0987654321</td>
+                                        <td>Quận 1</td>
+                                        <td><span class="badge bg-success">Hoạt động</span></td>
+                                        <td>10/03/2024</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Thao tác với môi giới">
+                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#realtorDetailsModal" aria-label="Xem chi tiết môi giới">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary admin-only" data-bs-toggle="modal" data-bs-target="#editRealtorModal" aria-label="Chỉnh sửa môi giới">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger admin-only" aria-label="Xóa môi giới">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>MG002</td>
+                                        <td>Trần Văn E</td>
+                                        <td>tranvane@example.com</td>
+                                        <td>0912345678</td>
+                                        <td>Quận 2</td>
+                                        <td><span class="badge bg-warning text-dark">Không hoạt động</span></td>
+                                        <td>15/02/2024</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Thao tác với môi giới">
+                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#realtorDetailsModal" aria-label="Xem chi tiết môi giới">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary admin-only" data-bs-toggle="modal" data-bs-target="#editRealtorModal" aria-label="Chỉnh sửa môi giới">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger admin-only" aria-label="Xóa môi giới">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>MG003</td>
+                                        <td>Lê Thị F</td>
+                                        <td>lethif@example.com</td>
+                                        <td>0932145678</td>
+                                        <td>Quận 7</td>
+                                        <td><span class="badge bg-success">Hoạt động</span></td>
+                                        <td>20/01/2024</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Thao tác với môi giới">
+                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#realtorDetailsModal" aria-label="Xem chi tiết môi giới">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary admin-only" data-bs-toggle="modal" data-bs-target="#editRealtorModal" aria-label="Chỉnh sửa môi giới">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger admin-only" aria-label="Xóa môi giới">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav aria-label="Phân trang danh sách môi giới" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Sau</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Realtor Modal -->
+    <div class="modal fade" id="addRealtorModal" tabindex="-1" aria-labelledby="addRealtorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRealtorModalLabel">Thêm môi giới mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRealtorForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorName" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" id="realtorName" required>
+                                <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="realtorEmail" required>
+                                <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorPhone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="realtorPhone" pattern="[0-9]{10}" required>
+                                <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (10 chữ số).</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorArea" class="form-label">Khu vực hoạt động</label>
+                                <select class="form-select" id="realtorArea" required>
+                                    <option value="" disabled selected>Chọn khu vực</option>
+                                    <option value="quan1">Quận 1</option>
+                                    <option value="quan2">Quận 2</option>
+                                    <option value="quan7">Quận 7</option>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn khu vực hoạt động.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorStatus" class="form-label">Trạng thái</label>
+                                <select class="form-select" id="realtorStatus" required>
+                                    <option value="" disabled selected>Chọn trạng thái</option>
+                                    <option value="active">Hoạt động</option>
+                                    <option value="inactive">Không hoạt động</option>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorJoinDate" class="form-label">Ngày tham gia</label>
+                                <input type="date" class="form-control" id="realtorJoinDate" required>
+                                <div class="invalid-feedback">Vui lòng chọn ngày tham gia.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorPassword" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="realtorPassword" required minlength="6">
+                                <div class="invalid-feedback">Mật khẩu phải có ít nhất 6 ký tự.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="realtorConfirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                                <input type="password" class="form-control" id="realtorConfirmPassword" required minlength="6">
+                                <div class="invalid-feedback">Vui lòng xác nhận mật khẩu.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="validateAddRealtorForm()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Realtor Modal -->
+    <div class="modal fade" id="editRealtorModal" tabindex="-1" aria-labelledby="editRealtorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRealtorModalLabel">Chỉnh sửa môi giới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editRealtorForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorName" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" id="editRealtorName" value="Nguyễn Thị D" required>
+                                <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="editRealtorEmail" value="nguyenthid@example.com" required>
+                                <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorPhone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="editRealtorPhone" value="0987654321" pattern="[0-9]{10}" required>
+                                <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (10 chữ số).</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorArea" class="form-label">Khu vực hoạt động</label>
+                                <select class="form-select" id="editRealtorArea" required>
+                                    <option value="quan1" selected>Quận 1</option>
+                                    <option value="quan2">Quận 2</option>
+                                    <option value="quan7">Quận 7</option>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn khu vực hoạt động.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorStatus" class="form-label">Trạng thái</label>
+                                <select class="form-select" id="editRealtorStatus" required>
+                                    <option value="active" selected>Hoạt động</option>
+                                    <option value="inactive">Không hoạt động</option>
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorJoinDate" class="form-label">Ngày tham gia</label>
+                                <input type="date" class="form-control" id="editRealtorJoinDate" value="2024-03-10" required>
+                                <div class="invalid-feedback">Vui lòng chọn ngày tham gia.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorPassword" class="form-label">Mật khẩu mới (nếu thay đổi)</label>
+                                <input type="password" class="form-control" id="editRealtorPassword" minlength="6">
+                                <div class="invalid-feedback">Mật khẩu phải có ít nhất 6 ký tự.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editRealtorConfirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                                <input type="password" class="form-control" id="editRealtorConfirmPassword" minlength="6">
+                                <div class="invalid-feedback">Vui lòng xác nhận mật khẩu.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="validateEditRealtorForm()">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Realtor Details Modal -->
+    <div class="modal fade" id="realtorDetailsModal" tabindex="-1" aria-labelledby="realtorDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="realtorDetailsModalLabel">Chi tiết môi giới #MG001</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Thông tin cá nhân</h6>
+                            <p><strong>Họ và tên:</strong> Nguyễn Thị D</p>
+                            <p><strong>Email:</strong> nguyenthid@example.com</p>
+                            <p><strong>Số điện thoại:</strong> 0987654321</p>
+                            <p><strong>Địa chỉ:</strong> 456 Đường XYZ, Quận 1, TP.HCM</p>
+                            <p><strong>Ngày tham gia:</strong> 10/03/2024</p>
+                            <p><strong>Trạng thái:</strong> <span class="badge bg-success">Hoạt động</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Thông tin hoạt động</h6>
+                            <p><strong>Mã môi giới:</strong> #MG001</p>
+                            <p><strong>Khu vực hoạt động:</strong> Quận 1</p>
+                            <p><strong>Số giao dịch hoàn thành:</strong> 15</p>
+                            <p><strong>Tổng giá trị giao dịch:</strong> 25 tỷ VNĐ</p>
+                            <p><strong>Xếp hạng:</strong> <i class="bi bi-star-fill text-warning"></i> 4.8/5</p>
+                        </div>
+                    </div>
+
+                    <h6 class="mb-3">Danh sách giao dịch gần đây</h6>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Mã giao dịch</th>
+                                        <th scope="col">Bất động sản</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Ngày</th>
+                                        <th scope="col">Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>GD001</td>
+                                        <td>Căn hộ cao cấp Quận 1</td>
+                                        <td>2.5 tỷ</td>
+                                        <td>15/05/2024</td>
+                                        <td><span class="badge bg-success">Hoàn thành</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GD004</td>
+                                        <td>Nhà phố Quận 1</td>
+                                        <td>3.8 tỷ</td>
+                                        <td>10/05/2024</td>
+                                        <td><span class="badge bg-success">Hoàn thành</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h6 class="mb-3">Lịch sử hoạt động</h6>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">15/05/2024 10:30</div>
+                            <div class="timeline-content">
+                                <h6>Hoàn thành giao dịch</h6>
+                                <p>Hoàn thành giao dịch #GD001 với giá 2.5 tỷ VNĐ.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">10/03/2024 09:00</div>
+                            <div class="timeline-content">
+                                <h6>Tham gia hệ thống</h6>
+                                <p>Đăng ký làm môi giới với khu vực hoạt động Quận 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" aria-label="In chi tiết môi giới">
+                        <i class="bi bi-printer"></i> In chi tiết
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-light py-3">
+        <div class="container text-center">
+            <span>© 2025 Hệ thống quản lý bất động sản. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/assets/js/admin.js"></script>
+</body>
+</html>
