@@ -1,0 +1,102 @@
+
+.header {
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Gradient xanh navy sang trọng */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav-link {
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #ffffff; /* Chữ trắng cho nổi bật trên nền gradient */
+}
+.nav-link:hover {
+    color: #facc15; /* Vàng ánh kim khi hover */
+    transform: translateY(10px);
+}
+.logo img {
+    transition: transform 0.3s ease;
+}
+.logo img:hover {
+    transform: scale(1.1);
+}
+.dropdown-menu {
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+    opacity: 0;
+    display: none;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 1000;
+    min-width: 220px;
+}
+.dropdown:hover .dropdown-menu {
+    transform: translateY(0);
+    opacity: 1;
+    display: block;
+}
+.dropdown-menu a {
+    padding: 0.75rem 1.5rem;
+    color: #1f2937;
+    transition: background 0.2s ease;
+}
+.dropdown-menu a:hover {
+    background: #f3f4f6;
+    color: #3b82f6;
+}
+.search-bar {
+    transition: all 0.3s ease;
+}
+.search-bar input:focus {
+    outline: none;
+    border-color: #facc15;
+    box-shadow: 0 0 8px rgba(250, 204, 21, 0.3);
+}
+.cta-button {
+    background: #facc15;
+    color: #1e3a8a;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+.cta-button:hover {
+    background: #eab308;
+    transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: #f9fafb;
+        transform: none;
+        opacity: 1;
+        display: none;
+        min-width: 100%;
+    }
+    .dropdown-menu.active {
+        display: block;
+    }
+    .search-bar {
+        display: none; /* Ẩn search bar trên mobile để gọn */
+    }
+    .cta-button {
+        margin: 1rem;
+        text-align: center;
+    }
+}

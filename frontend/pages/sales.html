@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tìm kiếm và mua bán bất động sản tại TP.HCM. Khám phá căn hộ, nhà phố, biệt thự và đất nền với giá tốt nhất.">
+    <meta name="keywords" content="mua bán bất động sản, căn hộ, nhà phố, biệt thự, đất nền, TP.HCM, Việt Nam">
+    <meta name="author" content="Bất Động Sản">
     <title>Mua bán bất động sản - Bất Động Sản</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/sale-style.css" rel="stylesheet">
+   
 </head>
 <body>
     <!-- Header -->
     <div id="header"></div>
 
     <!-- Main Content -->
-    <main class="container py-5">
+    <main class="container py-5" aria-labelledby="listing-title">
         <!-- Search and Filter Section -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="card">
+                <div class="card fade-in">
                     <div class="card-body">
-                        <form id="searchForm">
+                        <h2 class="section-title" id="listing-title">Tìm kiếm bất động sản</h2>
+                        <form id="searchForm" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm..." aria-describedby="searchFeedback">
+                                    <div id="searchFeedback" class="invalid-feedback">Vui lòng nhập từ khóa tìm kiếm.</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select">
+                                    <select class="form-select" id="propertyType" aria-label="Loại bất động sản">
                                         <option value="">Loại bất động sản</option>
                                         <option value="apartment">Căn hộ</option>
                                         <option value="house">Nhà phố</option>
@@ -34,7 +42,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select">
+                                    <select class="form-select" id="priceRange" aria-label="Giá">
                                         <option value="">Giá</option>
                                         <option value="1-2">1-2 tỷ</option>
                                         <option value="2-5">2-5 tỷ</option>
@@ -43,7 +51,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select">
+                                    <select class="form-select" id="areaRange" aria-label="Diện tích">
                                         <option value="">Diện tích</option>
                                         <option value="50-100">50-100m²</option>
                                         <option value="100-150">100-150m²</option>
@@ -52,8 +60,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        <i class="bi bi-search"></i> Tìm kiếm
+                                    <button type="submit" class="btn btn-primary w-100" id="searchSubmit">
+                                        <span id="searchSubmitText"><i class="bi bi-search me-2"></i>Tìm kiếm</span>
+                                        <span id="searchLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                     </button>
                                 </div>
                             </div>
@@ -64,25 +73,25 @@
         </div>
 
         <!-- Property List -->
-        <div class="row">
+        <div class="row" id="propertyList">
             <!-- Property Card 1 -->
             <div class="col-md-4 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 property-card fade-in">
                     <div class="position-absolute top-0 end-0 m-2">
                         <span class="badge bg-danger">Mới</span>
                     </div>
-                    <img src="../assets/images/property1.jpg" class="card-img-top" alt="Property Image">
+                    <img src="../assets/images/property1.jpg" class="card-img-top" alt="Căn hộ cao cấp Quận 1" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Căn hộ cao cấp Quận 1</h5>
                         <p class="card-text text-primary">2.500.000.000 VNĐ</p>
                         <p class="card-text">
-                            <i class="bi bi-geo-alt"></i> Quận 1, TP.HCM<br>
-                            <i class="bi bi-rulers"></i> 100m²<br>
-                            <i class="bi bi-door-open"></i> 3 phòng ngủ
+                            <i class="bi bi-geo-alt me-1"></i> Quận 1, TP.HCM<br>
+                            <i class="bi bi-rulers me-1"></i> 100m²<br>
+                            <i class="bi bi-door-open me-1"></i> 3 phòng ngủ
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="property-detail.html?id=1" class="btn btn-outline-primary">Xem chi tiết</a>
-                            <button class="btn btn-outline-danger">
+                            <a href="listing-detail.html?id=1" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                            <button class="btn btn-outline-danger btn-sm favorite-btn" data-id="1">
                                 <i class="bi bi-heart"></i>
                             </button>
                         </div>
@@ -92,22 +101,22 @@
 
             <!-- Property Card 2 -->
             <div class="col-md-4 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 property-card fade-in">
                     <div class="position-absolute top-0 end-0 m-2">
                         <span class="badge bg-success">Giảm giá</span>
                     </div>
-                    <img src="../assets/images/property2.jpg" class="card-img-top" alt="Property Image">
+                    <img src="../assets/images/property2.jpg" class="card-img-top" alt="Nhà phố Thủ Đức" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Nhà phố Thủ Đức</h5>
                         <p class="card-text text-primary">3.200.000.000 VNĐ</p>
                         <p class="card-text">
-                            <i class="bi bi-geo-alt"></i> Thủ Đức, TP.HCM<br>
-                            <i class="bi bi-rulers"></i> 150m²<br>
-                            <i class="bi bi-door-open"></i> 4 phòng ngủ
+                            <i class="bi bi-geo-alt me-1"></i> Thủ Đức, TP.HCM<br>
+                            <i class="bi bi-rulers me-1"></i> 150m²<br>
+                            <i class="bi bi-door-open me-1"></i> 4 phòng ngủ
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="property-detail.html?id=2" class="btn btn-outline-primary">Xem chi tiết</a>
-                            <button class="btn btn-outline-danger">
+                            <a href="listing-detail.html?id=2" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                            <button class="btn btn-outline-danger btn-sm favorite-btn" data-id="2">
                                 <i class="bi bi-heart"></i>
                             </button>
                         </div>
@@ -117,19 +126,19 @@
 
             <!-- Property Card 3 -->
             <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="../assets/images/property3.jpg" class="card-img-top" alt="Property Image">
+                <div class="card h-100 property-card fade-in">
+                    <img src="../assets/images/property3.jpg" class="card-img-top" alt="Biệt thự Bình Thạnh" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Biệt thự Bình Thạnh</h5>
                         <p class="card-text text-primary">5.800.000.000 VNĐ</p>
                         <p class="card-text">
-                            <i class="bi bi-geo-alt"></i> Bình Thạnh, TP.HCM<br>
-                            <i class="bi bi-rulers"></i> 250m²<br>
-                            <i class="bi bi-door-open"></i> 5 phòng ngủ
+                            <i class="bi bi-geo-alt me-1"></i> Bình Thạnh, TP.HCM<br>
+                            <i class="bi bi-rulers me-1"></i> 250m²<br>
+                            <i class="bi bi-door-open me-1"></i> 5 phòng ngủ
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="property-detail.html?id=3" class="btn btn-outline-primary">Xem chi tiết</a>
-                            <button class="btn btn-outline-danger">
+                            <a href="listing-detail.html?id=3" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                            <button class="btn btn-outline-danger btn-sm favorite-btn" data-id="3">
                                 <i class="bi bi-heart"></i>
                             </button>
                         </div>
@@ -139,39 +148,129 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="mt-4">
+        <nav class="mt-4 fade-in">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Trước</a>
+                <li class="page-item disabled" id="prevPage">
+                    <a class="page-link" href="#" tabindex="-1" aria-label="Trang trước">Trước</a>
                 </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Sau</a>
+                <li class="page-item active" data-page="1"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" data-page="2"><a class="page-link" href="#">2</a></li>
+                <li class="page-item" data-page="3"><a class="page-link" href="#">3</a></li>
+                <li class="page-item" id="nextPage">
+                    <a class="page-link" href="#" aria-label="Trang sau">Sau</a>
                 </li>
             </ul>
         </nav>
     </main>
 
+    <!-- Toast Notification -->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
+        <div class="toast-header">
+            <strong class="me-auto">Thông báo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+
     <!-- Footer -->
     <div id="footer"></div>
 
-       <!-- Scripts -->
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-       <script src="../assets/js/main.js"></script>
-       <script src="../assets/js/payment.js"></script>
-        <!-- Thêm jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#header").load("../templates/header.html", function() {
-                    console.log("Header loaded successfully");
-                });
-                $("#footer").load("../templates/footer.html", function() {
-                    console.log("Footer loaded successfully");
-                });
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load header and footer
+            $("#header").load("../templates/header.html", function() {
+                console.log("Header loaded successfully");
             });
-        </script>
+            $("#footer").load("../templates/footer.html", function() {
+                console.log("Footer loaded successfully");
+            });
+
+            // Search form submission
+            $('#searchForm').on('submit', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const searchInput = $('#searchInput').val();
+                if (this.checkValidity() && searchInput.trim()) {
+                    const submitButton = $('#searchSubmit');
+                    const submitText = $('#searchSubmitText');
+                    const loadingSpinner = $('#searchLoadingSpinner');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+
+                    submitButton.prop('disabled', true);
+                    submitText.addClass('d-none');
+                    loadingSpinner.removeClass('d-none');
+
+                    setTimeout(() => {
+                        submitButton.prop('disabled', false);
+                        submitText.removeClass('d-none');
+                        loadingSpinner.addClass('d-none');
+
+                        toastBody.text('Đã tìm kiếm bất động sản với từ khóa: ' + searchInput);
+                        toast.toast('show');
+                    }, 1500);
+                } else {
+                    this.classList.add('was-validated');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+                    toastBody.text('Vui lòng nhập từ khóa tìm kiếm hợp lệ.');
+                    toast.toast('show');
+                }
+            });
+
+            // Favorite button toggle
+            $('.favorite-btn').on('click', function() {
+                const toast = $('.toast');
+                const toastBody = $('.toast-body');
+                const id = $(this).data('id');
+                const isFavorited = $(this).hasClass('favorited');
+
+                if (!isFavorited) {
+                    $(this).addClass('favorited').html('<i class="bi bi-heart-fill"></i>');
+                    toastBody.text(`Đã thêm bất động sản #${id} vào danh sách yêu thích!`);
+                } else {
+                    $(this).removeClass('favorited').html('<i class="bi bi-heart"></i>');
+                    toastBody.text(`Đã xóa bất động sản #${id} khỏi danh sách yêu thích!`);
+                }
+                toast.toast('show');
+            });
+
+            // Pagination handling
+            $('.page-item[data-page]').on('click', function(e) {
+                e.preventDefault();
+                const page = $(this).data('page');
+                $('.page-item').removeClass('active');
+                $(this).addClass('active');
+
+                $('#prevPage').removeClass('disabled');
+                $('#nextPage').removeClass('disabled');
+                if (page === 1) $('#prevPage').addClass('disabled');
+                if (page === 3) $('#nextPage').addClass('disabled');
+
+               
+            });
+
+            $('#prevPage').on('click', function(e) {
+                e.preventDefault();
+                const currentPage = $('.page-item.active').data('page');
+                if (currentPage > 1) {
+                    $(`.page-item[data-page="${currentPage - 1}"]`).trigger('click');
+                }
+            });
+
+            $('#nextPage').on('click', function(e) {
+                e.preventDefault();
+                const currentPage = $('.page-item.active').data('page');
+                if (currentPage < 3) {
+                    $(`.page-item[data-page="${currentPage + 1}"]`).trigger('click');
+                }
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>

@@ -6,61 +6,68 @@
     <title>Bất Động Sản</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .nav-link {
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #10b981;
-            transform: translateY(-2px);
-        }
-        .header {
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .logo img {
-            transition: transform 0.3s ease;
-        }
-        .logo img:hover {
-            transform: scale(1.1);
-        }
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            .nav-menu.active {
-                display: flex;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
     <header class="header py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <a href="../pages/index.html" class="logo flex items-center">
-                <img src="../assets/images/logo.png" alt="Bất Động Sản Logo" class="h-12 w-auto">
-                <span class="ml-3 text-xl font-bold text-gray-800">Bất Động Sản</span>
+                <img src="../assets/images/logo.png" alt="Bất Động Sản Logo" class="h-20 w-auto">
+                <span class="ml-3 text-xl font-bold text-white">Bất Động Sản</span>
             </a>
-            <button class="md:hidden text-gray-800 focus:outline-none" id="menu-toggle">
+            <button class="md:hidden text-white focus:outline-none" id="menu-toggle" aria-label="Toggle menu">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
-            <nav class="nav-menu hidden md:flex space-x-6">
-                <a href="../pages/listings.html" class="nav-link text-gray-600 hover:text-green-500">Bất động sản</a>
-                <a href="../pages/sales.html" class="nav-link text-gray-600 hover:text-green-500">Mua bán</a>
-                <a href="../pages/rentals.html" class="nav-link text-gray-600 hover:text-green-500">Cho thuê</a>
-                <a href="../pages/about.html" class="nav-link text-gray-600 hover:text-green-500 font-semibold">Giới thiệu</a>
-                <a href="../pages/account.html" class="nav-link text-gray-600 hover:text-green-500">Liên hệ</a>
-            </nav>
+            <div class="hidden md:flex items-center space-x-6 nav-menu">
+                <nav class="flex space-x-6 items-center">
+                    <a href="../pages/index.html" class="nav-link">Trang chủ</a>
+                    <div class="relative dropdown">
+                        <a href="../pages/listings.html" class="nav-link flex items-center">
+                            Sản phẩm
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </a>
+                        <div class="dropdown-menu absolute mt-2 py-2">
+                            <a href="../pages/apartments.html" class="block">Căn hộ</a>
+                            <a href="../pages/villas.html" class="block">Biệt thự</a>
+                            <a href="../pages/condominiums.html" class="block">Chung cư</a>
+                            <a href="../pages/townhouses.html" class="block">Nhà phố</a>
+                            <a href="../pages/offices.html" class="block">Văn phòng</a>
+                            <a href="../pages/land.html" class="block">Đất nền</a>
+                        </div>
+                    </div>
+                    <a href="../pages/sales.html" class="nav-link">Mua bán</a>
+                    <a href="../pages/rentals.html" class="nav-link">Cho thuê</a>
+                    <a href="../pages/about.html" class="nav-link font-semibold">Giới thiệu</a>
+                    <a href="../pages/account.html" class="nav-link">Tài khoản</a>
+                </nav>
+              
+                <a href="../pages/contact.html" class="cta-button">Liên hệ ngay</a>
+            </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white shadow-lg hidden">
             <nav class="flex flex-col space-y-4 p-4">
-                <a href="../pages/listings.html" class="nav-link text-gray-600 hover:text-green-500">Bất động sản</a>
-                <a href="../pages/sales.html" class="nav-link text-gray-600 hover:text-green-500">Mua bán</a>
-                <a href="../pages/rentals.html" class="nav-link text-gray-600 hover:text-green-500">Cho thuê</a>
-                <a href="../pages/about.html" class="nav-link text-gray-600 hover:text-green-500 font-semibold">Giới thiệu</a>
-                <a href="../pages/account.html" class="nav-link text-gray-600 hover:text-green-500">Liên hệ</a>
+                <a href="../pages/index.html" class="nav-link text-gray-600 hover:text-blue-500">Trang chủ</a>
+                <div class="dropdown">
+                    <a href="../pages/listings.html" class="nav-link text-gray-600 hover:text-blue-500 flex items-center" id="products-toggle">
+                        Sản phẩm
+                        <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                    </a>
+                    <div class="dropdown-menu flex-col space-y-2 pl-4">
+                        <a href="../pages/apartments.html" class="block text-gray-600 hover:text-blue-500">Căn hộ</a>
+                        <a href="../pages/villas.html" class="block text-gray-600 hover:text-blue-500">Biệt thự</a>
+                        <a href="../pages/condominiums.html" class="block text-gray-600 hover:text-blue-500">Chung cư</a>
+                        <a href="../pages/townhouses.html" class="block text-gray-600 hover:text-blue-500">Nhà phố</a>
+                        <a href="../pages/offices.html" class="block text-gray-600 hover:text-blue-500">Văn phòng</a>
+                        <a href="../pages/land.html" class="block text-gray-600 hover:text-blue-500">Đất nền</a>
+                    </div>
+                </div>
+                <a href="../pages/sales.html" class="nav-link text-gray-600 hover:text-blue-500">Mua bán</a>
+                <a href="../pages/rentals.html" class="nav-link text-gray-600 hover:text-blue-500">Cho thuê</a>
+                <a href="../pages/about.html" class="nav-link text-gray-600 hover:text-blue-500 font-semibold">Giới thiệu</a>
+                <a href="../pages/account.html" class="nav-link text-gray-600 hover:text-blue-500">Tài khoản</a>
+                <a href="../pages/contact.html" class="cta-button">Liên hệ ngay</a>
             </nav>
         </div>
     </header>
@@ -69,11 +76,35 @@
     </main>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const mobileMenu = document.getElementById('mobile-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const productsToggle = document.getElementById('products-toggle');
+        const dropdownMenu = productsToggle.nextElementSibling;
+
+        // Toggle mobile menu
+        menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('nav-menu');
-            mobileMenu.classList.toggle('active');
+            if (mobileMenu.classList.contains('hidden')) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+
+        // Toggle dropdown on mobile
+        productsToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdownMenu.classList.toggle('active');
+        });
+
+        // Đóng dropdown khi click bên ngoài
+        document.addEventListener('click', (e) => {
+            if (!productsToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+
+        // Ngăn chặn sự kiện click trên dropdown menu lan truyền
+        dropdownMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     </script>
 </body>

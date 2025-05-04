@@ -3,47 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quản lý tài khoản cá nhân trên Real Estate. Cập nhật thông tin, đổi mật khẩu, xem lịch sử giao dịch và bất động sản yêu thích.">
+    <meta name="keywords" content="quản lý tài khoản, bất động sản, lịch sử giao dịch, yêu thích bất động sản, Việt Nam">
+    <meta name="author" content="Bất Động Sản">
     <title>Quản lý tài khoản - Bất Động Sản</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="../assets/css/style.css" rel="stylesheet">
+
     <link href="../assets/css/account.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Header -->
     <div id="header"></div>
 
     <!-- Main Content -->
-    <main class="container py-5">
+    <main class="container py-5" aria-labelledby="account-title">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3">
-                <div class="card mb-4">
+            <div class="col-md-3 sidebar">
+                <div class="card mb-4 fade-in">
                     <div class="card-body text-center">
-                        <img src="../assets/images/avatar-default.jpg" alt="Avatar" class="rounded-circle mb-3" width="100">
+                        <div class="avatar-container">
+                            <img src="../assets/images/avatar-default.jpg" alt="Avatar" class="rounded-circle" width="100" id="userAvatar">
+                        </div>
                         <h5 class="card-title" id="userName">Nguyễn Văn A</h5>
                         <p class="text-muted" id="userEmail">nguyenvana@email.com</p>
                         <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changeAvatarModal">
-                            <i class="bi bi-camera"></i> Đổi ảnh
+                            <i class="bi bi-camera me-2"></i>Đổi ảnh
                         </button>
                     </div>
                 </div>
 
                 <div class="list-group">
-                    <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="list">
-                        <i class="bi bi-person me-2"></i> Thông tin cá nhân
+                    <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="list" aria-current="true">
+                        <i class="bi bi-person me-2"></i>Thông tin cá nhân
                     </a>
                     <a href="#security" class="list-group-item list-group-item-action" data-bs-toggle="list">
-                        <i class="bi bi-shield-lock me-2"></i> Bảo mật
+                        <i class="bi bi-shield-lock me-2"></i>Bảo mật
                     </a>
                     <a href="#transactions" class="list-group-item list-group-item-action" data-bs-toggle="list">
-                        <i class="bi bi-credit-card me-2"></i> Giao dịch
+                        <i class="bi bi-credit-card me-2"></i>Giao dịch
                     </a>
                     <a href="#favorites" class="list-group-item list-group-item-action" data-bs-toggle="list">
-                        <i class="bi bi-heart me-2"></i> Yêu thích
+                        <i class="bi bi-heart me-2"></i>Yêu thích
                     </a>
                     <a href="#notifications" class="list-group-item list-group-item-action" data-bs-toggle="list">
-                        <i class="bi bi-bell me-2"></i> Thông báo
+                        <i class="bi bi-bell me-2"></i>Thông báo
                     </a>
                 </div>
             </div>
@@ -53,37 +61,47 @@
                 <div class="tab-content">
                     <!-- Profile Tab -->
                     <div class="tab-pane fade show active" id="profile">
-                        <div class="card">
+                        <div class="card fade-in">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Thông tin cá nhân</h5>
+                                <h5 class="section-title mb-0">Thông tin cá nhân</h5>
                             </div>
                             <div class="card-body">
-                                <form id="profileForm">
+                                <form id="profileForm" novalidate>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label">Họ và tên</label>
-                                            <input type="text" class="form-control" id="fullName" value="Nguyễn Văn A">
+                                            <input type="text" class="form-control" id="fullName" value="Nguyễn Văn A" required aria-describedby="fullNameFeedback">
+                                            <div id="fullNameFeedback" class="invalid-feedback">Vui lòng nhập họ và tên.</div>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" value="nguyenvana@email.com">
+                                            <input type="email" class="form-control" id="email" value="nguyenvana@email.com" required aria-describedby="emailFeedback">
+                                            <div id="emailFeedback" class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label">Số điện thoại</label>
-                                            <input type="tel" class="form-control" id="phone" value="0123456789">
+                                            <input type="tel" class="form-control" id="phone" value="0123456789" required pattern="\+84\d{9,10}|\d{10}" aria-describedby="phoneFeedback">
+                                            <div id="phoneFeedback" class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Ngày sinh</label>
-                                            <input type="date" class="form-control" id="birthDate" value="1990-01-01">
+                                            <input type="date" class="form-control" id="birthDate" value="1990-01-01" aria-describedby="birthDateFeedback">
+                                            <div id="birthDateFeedback" class="invalid-feedback">Vui lòng chọn ngày sinh hợp lệ.</div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Địa chỉ</label>
-                                        <textarea class="form-control" id="address" rows="2">123 Đường ABC, Quận 1, TP.HCM</textarea>
+                                        <textarea class="form-control" id="address" rows="2" aria-describedby="addressFeedback">123 Đường ABC, Quận 1, TP.HCM</textarea>
+                                        <div id="addressFeedback" class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary" id="profileSubmit">
+                                            <span id="profileSubmitText"><i class="bi bi-save me-2"></i>Cập nhật thông tin</span>
+                                            <span id="profileLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -91,25 +109,33 @@
 
                     <!-- Security Tab -->
                     <div class="tab-pane fade" id="security">
-                        <div class="card">
+                        <div class="card fade-in">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Bảo mật</h5>
+                                <h5 class="section-title mb-0">Bảo mật</h5>
                             </div>
                             <div class="card-body">
-                                <form id="securityForm">
+                                <form id="securityForm" novalidate>
                                     <div class="mb-3">
                                         <label class="form-label">Mật khẩu hiện tại</label>
-                                        <input type="password" class="form-control" id="currentPassword">
+                                        <input type="password" class="form-control" id="currentPassword" required aria-describedby="currentPasswordFeedback">
+                                        <div id="currentPasswordFeedback" class="invalid-feedback">Vui lòng nhập mật khẩu hiện tại.</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Mật khẩu mới</label>
-                                        <input type="password" class="form-control" id="newPassword">
+                                        <input type="password" class="form-control" id="newPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="newPasswordFeedback">
+                                        <div id="newPasswordFeedback" class="invalid-feedback">Mật khẩu mới phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Xác nhận mật khẩu mới</label>
-                                        <input type="password" class="form-control" id="confirmPassword">
+                                        <input type="password" class="form-control" id="confirmPassword" required aria-describedby="confirmPasswordFeedback">
+                                        <div id="confirmPasswordFeedback" class="invalid-feedback">Mật khẩu xác nhận không khớp.</div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary" id="securitySubmit">
+                                            <span id="securitySubmitText"><i class="bi bi-lock me-2"></i>Đổi mật khẩu</span>
+                                            <span id="securityLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -117,13 +143,13 @@
 
                     <!-- Transactions Tab -->
                     <div class="tab-pane fade" id="transactions">
-                        <div class="card">
+                        <div class="card fade-in">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Lịch sử giao dịch</h5>
+                                <h5 class="section-title mb-0">Lịch sử giao dịch</h5>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Mã giao dịch</th>
@@ -135,7 +161,22 @@
                                             </tr>
                                         </thead>
                                         <tbody id="transactionsTableBody">
-                                            <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                                            <tr>
+                                                <td>TXN123456</td>
+                                                <td>Căn hộ cao cấp Quận 1</td>
+                                                <td>Mua</td>
+                                                <td>2.550.000.000 VNĐ</td>
+                                                <td><span class="badge bg-success">Hoàn tất</span></td>
+                                                <td>05/11/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TXN789012</td>
+                                                <td>Biệt thự Phú Mỹ Hưng</td>
+                                                <td>Đặt cọc</td>
+                                                <td>500.000.000 VNĐ</td>
+                                                <td><span class="badge bg-warning">Đang xử lý</span></td>
+                                                <td>03/11/2024</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -145,13 +186,32 @@
 
                     <!-- Favorites Tab -->
                     <div class="tab-pane fade" id="favorites">
-                        <div class="card">
+                        <div class="card fade-in">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Bất động sản yêu thích</h5>
+                                <h5 class="section-title mb-0">Bất động sản yêu thích</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row" id="favoritesContainer">
-                                    <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card favorite-card">
+                                            <img src="../assets/images/property1.jpg" class="card-img-top" alt="Căn hộ Quận 1">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Căn hộ cao cấp Quận 1</h6>
+                                                <p class="card-text text-muted">2.550.000.000 VNĐ</p>
+                                                <a href="../pages/listing-detail.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card favorite-card">
+                                            <img src="../assets/images/property2.jpg" class="card-img-top" alt="Biệt thự Phú Mỹ Hưng">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Biệt thự Phú Mỹ Hưng</h6>
+                                                <p class="card-text text-muted">5.000.000.000 VNĐ</p>
+                                                <a href="../pages/listing-detail.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,12 +219,12 @@
 
                     <!-- Notifications Tab -->
                     <div class="tab-pane fade" id="notifications">
-                        <div class="card">
+                        <div class="card fade-in">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Cài đặt thông báo</h5>
+                                <h5 class="section-title mb-0">Cài đặt thông báo</h5>
                             </div>
                             <div class="card-body">
-                                <form id="notificationsForm">
+                                <form id="notificationsForm" novalidate>
                                     <div class="mb-3">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
@@ -189,7 +249,12 @@
                                             <label class="form-check-label" for="newListings">Bất động sản mới</label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Lưu cài đặt</button>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary" id="notificationsSubmit">
+                                            <span id="notificationsSubmitText"><i class="bi bi-save me-2"></i>Lưu cài đặt</span>
+                                            <span id="notificationsLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -200,18 +265,19 @@
     </main>
 
     <!-- Change Avatar Modal -->
-    <div class="modal fade" id="changeAvatarModal" tabindex="-1">
+    <div class="modal fade" id="changeAvatarModal" tabindex="-1" aria-labelledby="changeAvatarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Đổi ảnh đại diện</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="changeAvatarModalLabel">Đổi ảnh đại diện</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="avatarForm">
+                    <form id="avatarForm" novalidate>
                         <div class="mb-3">
-                            <label class="form-label">Chọn ảnh</label>
-                            <input type="file" class="form-control" id="avatarInput" accept="image/*">
+                            <label class="form-label">Chọn ảnh (tối đa 2MB)</label>
+                            <input type="file" class="form-control" id="avatarInput" accept="image/*" required aria-describedby="avatarInputFeedback">
+                            <div id="avatarInputFeedback" class="invalid-feedback">Vui lòng chọn một file ảnh hợp lệ.</div>
                         </div>
                         <div class="text-center">
                             <img id="avatarPreview" src="../assets/images/avatar-default.jpg" alt="Avatar Preview" class="rounded-circle mb-3" width="150">
@@ -220,30 +286,203 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" id="saveAvatar">Lưu</button>
+                    <button type="button" class="btn btn-primary" id="saveAvatar">
+                        <span id="avatarSubmitText"><i class="bi bi-save me-2"></i>Lưu</span>
+                        <span id="avatarLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
+        <div class="toast-header">
+            <strong class="me-auto">Thông báo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+
     <!-- Footer -->
     <div id="footer"></div>
-    
-    <!-- Thêm jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../assets/js/account.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
+            // Load header and footer
             $("#header").load("../templates/header.html", function() {
                 console.log("Header loaded successfully");
             });
             $("#footer").load("../templates/footer.html", function() {
                 console.log("Footer loaded successfully");
             });
+
+            // Profile form submission
+            $('#profileForm').on('submit', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (this.checkValidity()) {
+                    const submitButton = $('#profileSubmit');
+                    const submitText = $('#profileSubmitText');
+                    const loadingSpinner = $('#profileLoadingSpinner');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+
+                    submitButton.prop('disabled', true);
+                    submitText.addClass('d-none');
+                    loadingSpinner.removeClass('d-none');
+
+                    setTimeout(() => {
+                        submitButton.prop('disabled', false);
+                        submitText.removeClass('d-none');
+                        loadingSpinner.addClass('d-none');
+
+                        toastBody.text('Thông tin cá nhân đã được cập nhật thành công!');
+                        toast.toast('show');
+
+                        $('#userName').text($('#fullName').val());
+                        $('#userEmail').text($('#email').val());
+                    }, 1500);
+                } else {
+                    this.classList.add('was-validated');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+                    toastBody.text('Vui lòng điền đầy đủ và chính xác các thông tin.');
+                    toast.toast('show');
+                }
+            });
+
+            // Security form submission
+            $('#securityForm').on('submit', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const newPassword = $('#newPassword').val();
+                const confirmPassword = $('#confirmPassword').val();
+
+                if (this.checkValidity() && newPassword === confirmPassword) {
+                    const submitButton = $('#securitySubmit');
+                    const submitText = $('#securitySubmitText');
+                    const loadingSpinner = $('#securityLoadingSpinner');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+
+                    submitButton.prop('disabled', true);
+                    submitText.addClass('d-none');
+                    loadingSpinner.removeClass('d-none');
+
+                    setTimeout(() => {
+                        submitButton.prop('disabled', false);
+                        submitText.removeClass('d-none');
+                        loadingSpinner.addClass('d-none');
+
+                        toastBody.text('Mật khẩu đã được thay đổi thành công!');
+                        toast.toast('show');
+
+                        this.reset();
+                        this.classList.remove('was-validated');
+                    }, 1500);
+                } else {
+                    this.classList.add('was-validated');
+                    if (newPassword !== confirmPassword) {
+                        $('#confirmPasswordFeedback').text('Mật khẩu xác nhận không khớp.');
+                    }
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+                    toastBody.text('Vui lòng điền đầy đủ và chính xác các thông tin.');
+                    toast.toast('show');
+                }
+            });
+
+            // Notifications form submission
+            $('#notificationsForm').on('submit', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const submitButton = $('#notificationsSubmit');
+                const submitText = $('#notificationsSubmitText');
+                const loadingSpinner = $('#notificationsLoadingSpinner');
+                const toast = $('.toast');
+                const toastBody = $('.toast-body');
+
+                submitButton.prop('disabled', true);
+                submitText.addClass('d-none');
+                loadingSpinner.removeClass('d-none');
+
+                setTimeout(() => {
+                    submitButton.prop('disabled', false);
+                    submitText.removeClass('d-none');
+                    loadingSpinner.addClass('d-none');
+
+                    toastBody.text('Cài đặt thông báo đã được lưu thành công!');
+                    toast.toast('show');
+                }, 1500);
+            });
+
+            // Avatar change
+            $('#avatarInput').on('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.size <= 2 * 1024 * 1024) { // Max 2MB
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#avatarPreview').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+                    toastBody.text('Vui lòng chọn file ảnh dưới 2MB.');
+                    toast.toast('show');
+                    this.value = '';
+                }
+            });
+
+            $('#saveAvatar').on('click', function() {
+                const submitButton = $(this);
+                const submitText = $('#avatarSubmitText');
+                const loadingSpinner = $('#avatarLoadingSpinner');
+                const toast = $('.toast');
+                const toastBody = $('.toast-body');
+
+                if ($('#avatarInput').val()) {
+                    submitButton.prop('disabled', true);
+                    submitText.addClass('d-none');
+                    loadingSpinner.removeClass('d-none');
+
+                    setTimeout(() => {
+                        submitButton.prop('disabled', false);
+                        submitText.removeClass('d-none');
+                        loadingSpinner.addClass('d-none');
+
+                        $('#userAvatar').attr('src', $('#avatarPreview').attr('src'));
+                        $('#changeAvatarModal').modal('hide');
+                        $('#avatarForm').get(0).reset();
+                        $('#avatarPreview').attr('src', '../assets/images/avatar-default.jpg');
+
+                        toastBody.text('Ảnh đại diện đã được cập nhật thành công!');
+                        toast.toast('show');
+                    }, 1500);
+                } else {
+                    $('#avatarForm').addClass('was-validated');
+                    const toast = $('.toast');
+                    const toastBody = $('.toast-body');
+                    toastBody.text('Vui lòng chọn một file ảnh.');
+                    toast.toast('show');
+                }
+            });
+
+            // Input masking for phone
+            $('#phone').on('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                this.value = value;
+            });
         });
     </script>
 </body>
-</html> 
+</html>

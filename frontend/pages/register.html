@@ -3,76 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Đăng ký tài khoản để tìm kiếm và quản lý các bất động sản chất lượng cao.">
     <title>Đăng ký - Bất Động Sản</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../assets/css/register-style.css" rel="stylesheet">
 </head>
 <body>
-
-
     <!-- Register Form -->
-    <main class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Đăng ký tài khoản</h2>
-                        <form id="registerForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Họ và tên</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="password" class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Số điện thoại</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address" name="address">
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="agreeTerms" required>
-                                <label class="form-check-label" for="agreeTerms">
-                                    Tôi đồng ý với <a href="/pages/terms.html">điều khoản sử dụng</a> và <a href="/pages/privacy.html">chính sách bảo mật</a>
-                                </label>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Đăng ký</button>
-                            </div>
-                        </form>
-                        <hr>
-                        <div class="text-center">
-                            <p>Đã có tài khoản? <a href="/pages/login.html">Đăng nhập</a></p>
-                        </div>
+    <main class="register-container">
+        <div class="register-form" data-aos="fade-up">
+            <!-- Logo -->
+            <div class="text-center">
+                <img src="../assets/images/logo.png" alt="Bất Động Sản Logo" class="logo">
+            </div>
+            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step-1">1</div>
+                <div class="step" id="step-2">2</div>
+            </div>
+            <!-- Error Alert -->
+            <div id="errorAlert" class="alert alert-danger d-none" role="alert"></div>
+            <form id="registerForm">
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active" id="step1">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ (tùy chọn)">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn-navigate" onclick="nextStep(2)">Tiếp theo</button>
                     </div>
                 </div>
+                <!-- Step 2: Account Information & Terms -->
+                <div class="form-step" id="step2">
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            Tôi đồng ý với <a href="/pages/terms.html">điều khoản sử dụng</a> và <a href="/pages/privacy.html">chính sách bảo mật</a>
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn-navigate" onclick="prevStep(1)">Quay lại</button>
+                        <button type="submit" class="btn-register">ĐĂNG KÝ</button>
+                    </div>
+                </div>
+            </form>
+            <div class="login-link">
+                Đã có tài khoản? <a href="../pages/login.html">Đăng nhập</a>
             </div>
         </div>
     </main>
 
-   
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/auth.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 1000 });
+
+        // Step Navigation
+        function nextStep(step) {
+            $('.form-step').removeClass('active');
+            $(`#step${step}`).addClass('active');
+            $('.step').removeClass('active');
+            $(`#step-${step}`).addClass('active');
+        }
+
+        function prevStep(step) {
+            $('.form-step').removeClass('active');
+            $(`#step${step}`).addClass('active');
+            $('.step').removeClass('active');
+            $(`#step-${step}`).addClass('active');
+        }
+
+        // Toggle Password Visibility
+        $('.toggle-password').click(function() {
+            const passwordInput = $(this).siblings('input');
+            const icon = $(this).find('i');
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordInput.attr('type', 'password');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        // Basic Form Validation (Client-side)
+        $('#registerForm').submit(function(e) {
+            e.preventDefault();
+            const name = $('#name').val();
+            const email = $('#email').val();
+            const password = $('#password').val();
+            const confirmPassword = $('#confirmPassword').val();
+            const phone = $('#phone').val();
+            const agreeTerms = $('#agreeTerms').is(':checked');
+            const errorAlert = $('#errorAlert');
+
+            // Reset alert
+            errorAlert.addClass('d-none');
+
+            // Validation
+            if (!name || !email || !password || !confirmPassword || !phone || !agreeTerms) {
+                errorAlert.removeClass('d-none').text('Vui lòng điền đầy đủ thông tin và đồng ý điều khoản.');
+                return;
+            }
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                errorAlert.removeClass('d-none').text('Email không hợp lệ.');
+                return;
+            }
+            if (password !== confirmPassword) {
+                errorAlert.removeClass('d-none').text('Mật khẩu và xác nhận mật khẩu không khớp.');
+                return;
+            }
+            if (!/^\+?(\d{1,3})?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/.test(phone)) {
+                errorAlert.removeClass('d-none').text('Số điện thoại không hợp lệ.');
+                return;
+            }
+
+            // Simulate registration (replace with actual API call)
+            if (name && email && password && phone) {
+                errorAlert.removeClass('d-none').addClass('alert-success').text('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.');
+                setTimeout(() => window.location.href = '/pages/login.html', 2000);
+            } else {
+                errorAlert.removeClass('d-none').text('Đăng ký thất bại. Vui lòng thử lại.');
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
